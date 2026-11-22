@@ -100,7 +100,7 @@ nav#top.solid{background:rgba(10,10,12,.88);backdrop-filter:blur(12px);border-bo
 @keyframes scan{to{top:110%}}
 
 /* ---------- shared section chrome ---------- */
-section.block{padding:clamp(72px,11vw,130px) 0;position:relative}
+section.block{scroll-margin-top:88px;padding:clamp(72px,11vw,130px) 0;position:relative}
 .wrap{max-width:1120px;margin:0 auto;padding:0 clamp(20px,4vw,44px)}
 .sechead{margin-bottom:clamp(36px,5vw,64px)}
 .sechead .kicker{display:block;margin-bottom:10px}
@@ -934,9 +934,20 @@ footer .wrap{position:relative;z-index:1}
     burger.classList.toggle("x",open);
     document.body.style.overflow=open?"hidden":"";
   });
-  links.querySelectorAll("a").forEach(function(a){
-    a.addEventListener("click",function(){
+  function anchorScroll(a){
+    var href=a.getAttribute("href")||"";
+    if(href.charAt(0)!=="#")return false;
+    var t=null;
+    try{t=document.querySelector(href)}catch(e){}
+    if(!t)return false;
+    try{t.scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"})}catch(err){t.scrollIntoView()}
+    if(history.replaceState)history.replaceState(null,"",href);else location.hash=href.slice(1);
+    return true;
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener("click",function(e){
       links.classList.remove("open");burger.classList.remove("x");document.body.style.overflow="";
+      if(anchorScroll(a))e.preventDefault();
     });
   });
 
