@@ -3,193 +3,737 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Shinobi Legacy</title>
-<meta name="description" content="Shinobi Legacy, a 3D ninja browser game. Your legacy begins here.">
+<title>Shinobi Legacy — Official Site</title>
+<meta name="description" content="Shinobi Legacy, a 3D ninja browser MMORPG. Explore five villages, master jutsu, forge your legacy.">
 <style>
 :root{
-  --bg:#0b0b10; --panel:#14141c; --line:#2c2c3a; --txt:#e8e8f0; --dim:#9a9aac;
-  --red:#ff4d4d; --red2:#d0342c; --gold:#e8c368;
+  --obsidian:#0a0a0c; --charcoal:#121216; --ash:#8d8d99; --paper:#eceae6;
+  --crimson:#a8112d; --crimson-hi:#c81636; --line:rgba(255,255,255,.09);
+  --serif:'Times New Roman', Georgia, serif;
 }
-*{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--txt);font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
-body{line-height:1.55}
-a{color:var(--gold)}
-.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
-header{position:sticky;top:0;z-index:20;background:rgba(11,11,16,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
-.nav{display:flex;align-items:center;gap:10px;padding:14px 0;flex-wrap:wrap}
-.logo{font-weight:900;font-size:20px;letter-spacing:1px;color:#fff}
-.logo em{color:var(--red);font-style:normal}
-nav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
-nav button{background:none;border:1px solid transparent;color:var(--dim);font:inherit;font-weight:700;
-  padding:8px 14px;border-radius:999px;cursor:pointer}
-nav button:hover{color:#fff}
-nav button.on{color:#fff;border-color:var(--red2);background:rgba(255,77,77,.12)}
-.banner{background:linear-gradient(90deg,#2a0d0d,#1a0f10);border-bottom:1px solid var(--line)}
-.banner .wrap{padding:9px 20px;font-size:14px;color:#ffb3b3}
-section{display:none;padding:38px 0 60px}
-section.on{display:block}
-h2{margin:0 0 6px;font-size:28px}
-h2 .jp{color:var(--red);font-size:15px;font-weight:800;letter-spacing:3px;display:block;margin-bottom:4px}
-.sub{color:var(--dim);margin:0 0 26px}
-.hero{padding:60px 0 50px;text-align:center}
-.hero .kicker{color:var(--gold);letter-spacing:4px;font-weight:800;font-size:13px}
-.hero h1{font-size:clamp(38px,7vw,64px);margin:10px 0 6px;letter-spacing:2px}
-.hero h1 em{font-style:normal;color:var(--red)}
-.hero p{color:var(--dim);max-width:520px;margin:0 auto 26px}
-.btn{display:inline-block;background:var(--red2);color:#fff;font-weight:800;border:0;border-radius:999px;
-  padding:14px 34px;font-size:17px;cursor:pointer;text-decoration:none}
-.btn:hover{background:#e04338;transform:translateY(-1px)}
-.btn.ghost{background:none;border:1px solid var(--line);color:var(--txt)}
-.btnrow{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px}
-.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 22px;min-width:140px}
-.stat b{display:block;font-size:20px}
-.stat span{color:var(--dim);font-size:13px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:16px}
-.card h3{margin:0 0 8px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media(max-width:720px){.grid2{grid-template-columns:1fr}}
-.framebox{aspect-ratio:16/10;background:#000;border:1px solid var(--line);border-radius:16px;overflow:hidden}
-.framebox iframe{width:100%;height:100%;border:0}
-.note{color:var(--dim);font-size:14px;margin-top:10px}
-.warn{background:#2a1308;border:1px solid #6b3a12;color:#ffc98a;border-radius:12px;padding:12px 16px;margin:14px 0;font-size:15px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto} *{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+body{background:var(--obsidian);color:var(--paper);font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;line-height:1.6;overflow-x:hidden}
+::selection{background:var(--crimson);color:#fff}
+a{color:inherit}
+img{display:block;max-width:100%}
+
+/* ---------- nav ---------- */
+nav#top{position:fixed;inset:0 0 auto 0;z-index:90;display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(16px,4vw,44px);height:72px;transition:background .4s,border-color .4s,height .4s;border-bottom:1px solid transparent}
+nav#top.solid{background:rgba(10,10,12,.88);backdrop-filter:blur(12px);border-bottom-color:var(--line);height:62px}
+.logo{font-weight:900;letter-spacing:.14em;font-size:19px;color:#fff;text-decoration:none;white-space:nowrap}
+.logo em{font-style:normal;color:#e33}
+.brandmark{color:var(--ash);font-size:11px;letter-spacing:.34em;text-transform:uppercase;margin-left:14px;display:none}
+@media(min-width:900px){.brandmark{display:inline}}
+#navlinks{display:flex;gap:4px;align-items:center}
+#navlinks a{color:var(--ash);text-decoration:none;font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:9px 13px;border-radius:3px;transition:color .25s;position:relative}
+#navlinks a:hover{color:#fff}
+#navlinks a.active{color:#fff}
+#navlinks a.active::after{content:"";position:absolute;left:13px;right:13px;bottom:2px;height:1px;background:var(--crimson-hi)}
+#navlinks a.play{color:#fff;border:1px solid var(--crimson);background:linear-gradient(180deg,rgba(168,17,45,.35),rgba(168,17,45,.15));
+  padding:9px 20px;margin-left:8px}
+#navlinks a.play:hover{background:var(--crimson)}
+@media(max-width:860px){#navlinks{position:fixed;inset:0;background:rgba(8,8,10,.97);backdrop-filter:blur(8px);
+  flex-direction:column;justify-content:center;gap:10px;transform:translateX(100%);transition:transform .45s cubic-bezier(.7,0,.2,1);z-index:95}
+ #navlinks.open{transform:translateX(0)}
+ #navlinks a{font-size:22px;letter-spacing:.22em;padding:12px 20px;opacity:0;transform:translateY(14px);transition:opacity .4s,transform .4s}
+ #navlinks.open a{opacity:1;transform:none}
+ #navlinks.open a:nth-child(2){transition-delay:.05s}#navlinks.open a:nth-child(3){transition-delay:.1s}
+ #navlinks.open a:nth-child(4){transition-delay:.15s}#navlinks.open a:nth-child(5){transition-delay:.2s}
+ #navlinks.open a:nth-child(6){transition-delay:.25s}#navlinks.open a:nth-child(7){transition-delay:.3s}}
+#burger{display:none;background:none;border:0;cursor:pointer;padding:10px;z-index:99}
+#burger span{display:block;width:24px;height:2px;background:#fff;margin:5px 0;transition:transform .35s,opacity .3s}
+@media(max-width:860px){#burger{display:block}}
+#burger.x span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+#burger.x span:nth-child(2){opacity:0}
+#burger.x span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ---------- hero ---------- */
+#home{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+#herobg{position:absolute;inset:-12% 0;background:url('assets/final-form.jpg') center 30%/cover no-repeat;will-change:transform}
+#home::after{content:"";position:absolute;inset:0;background:
+  radial-gradient(120% 90% at 50% 10%,rgba(10,10,12,.15) 0%,rgba(10,10,12,.62) 55%,var(--obsidian) 96%),
+  linear-gradient(180deg,rgba(10,10,12,.55),rgba(10,10,12,.25) 40%,rgba(10,10,12,.9) 92%)}
+.fog{position:absolute;left:-30%;width:160%;height:60%;pointer-events:none;filter:blur(46px);opacity:.14;
+  background:radial-gradient(60% 100% at 30% 50%,#cfd3de 0%,transparent 70%),radial-gradient(50% 90% at 75% 40%,#aeb4c2 0%,transparent 70%)}
+.fog.f1{top:22%;animation:drift 26s ease-in-out infinite alternate}
+.fog.f2{top:48%;opacity:.1;animation:drift 34s ease-in-out infinite alternate-reverse}
+@keyframes drift{from{transform:translateX(-6%)}to{transform:translateX(7%)}}
+.leaf{position:absolute;top:-6vh;width:10px;height:10px;pointer-events:none;opacity:0;background:var(--crimson);
+  clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%);animation:fall linear infinite}
+@keyframes fall{0%{transform:translate(0,-5vh) rotate(0);opacity:0}8%{opacity:.5}90%{opacity:.35}
+ 100%{transform:translate(-9vw,108vh) rotate(340deg);opacity:0}}
+.hero-in{position:relative;z-index:2;padding:0 22px;max-width:820px}
+.kicker{color:var(--ash);letter-spacing:.5em;text-transform:uppercase;font-size:12px;font-weight:700}
+.hero-in h1{font-size:clamp(44px,10vw,108px);font-weight:900;letter-spacing:.06em;line-height:1.02;margin:18px 0 10px;color:#fff;
+  text-shadow:0 4px 40px rgba(0,0,0,.7)}
+.hero-in h1 em{font-style:normal;color:#e33}
+.tagline{font-family:var(--serif);font-style:italic;color:var(--ash);font-size:clamp(17px,2.4vw,22px);letter-spacing:.08em}
+.btnrow{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;text-decoration:none;
+  font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:13px;padding:16px 36px;border:0;
+  background:var(--crimson);color:#fff;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);transition:background .25s,transform .25s}
+.btn:hover{background:var(--crimson-hi);transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--paper);box-shadow:inset 0 0 0 1px rgba(255,255,255,.28)}
+.btn.ghost:hover{box-shadow:inset 0 0 0 1px #fff;background:rgba(255,255,255,.05)}
+.hversion{margin-top:44px;color:var(--ash);font-size:12px;letter-spacing:.3em;text-transform:uppercase}
+.hversion b{color:var(--paper)}
+.scrolldot{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);width:1px;height:44px;background:rgba(255,255,255,.25);overflow:hidden;z-index:2}
+.scrolldot::after{content:"";position:absolute;left:0;top:-40%;width:1px;height:40%;background:#fff;animation:scan 2.2s ease-in-out infinite}
+@keyframes scan{to{top:110%}}
+
+/* ---------- shared section chrome ---------- */
+section.block{padding:clamp(72px,11vw,130px) 0;position:relative}
+.wrap{max-width:1120px;margin:0 auto;padding:0 clamp(20px,4vw,44px)}
+.sechead{margin-bottom:clamp(36px,5vw,64px)}
+.sechead .kicker{display:block;margin-bottom:10px}
+.sechead h2{font-size:clamp(30px,5vw,52px);font-weight:900;letter-spacing:.04em;line-height:1.05}
+.sechead h2 em{font-style:normal;color:#e33}
+.sechead p{color:var(--ash);max-width:640px;margin-top:12px}
+.rule{width:56px;height:2px;background:var(--crimson);margin-top:18px}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.6,.2,1),transform .8s cubic-bezier(.2,.6,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- the game : alternating features ---------- */
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);align-items:center;margin-bottom:clamp(48px,7vw,96px)}
+.feat:last-child{margin-bottom:0}
+.feat:nth-child(even) .featimg{order:2}
+.featimg{position:relative;overflow:hidden;border-radius:4px;box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.featimg img{width:100%;aspect-ratio:16/10;object-fit:cover;transform:scale(1.03);transition:transform 1.2s cubic-bezier(.2,.6,.2,1)}
+.feat:hover .featimg img{transform:scale(1.08)}
+.featimg::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(10,10,12,.1),rgba(10,10,12,.5))}
+.featimg .tag{position:absolute;left:16px;bottom:14px;z-index:2;color:var(--ash);font-size:11px;letter-spacing:.3em;text-transform:uppercase}
+.feat h3{font-size:clamp(22px,3vw,32px);font-weight:900;letter-spacing:.03em;margin-bottom:12px}
+.feat p{color:var(--ash);max-width:52ch}
+.feat ul{list-style:none;margin-top:14px}
+.feat li{color:var(--ash);padding:5px 0 5px 18px;position:relative;font-size:15px}
+.feat li::before{content:"";position:absolute;left:0;top:12px;width:8px;height:1px;background:var(--crimson-hi)}
+@media(max-width:820px){.feat{grid-template-columns:1fr}.feat:nth-child(even) .featimg{order:0}}
+.minifeats{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);margin-top:clamp(40px,6vw,72px)}
+.minifeat{background:var(--charcoal);padding:26px 24px;transition:background .3s}
+.minifeat:hover{background:#17171d}
+.minifeat b{display:block;font-size:13px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px;color:#fff}
+.minifeat span{color:var(--ash);font-size:14.5px}
+
+/* ---------- world ---------- */
+#world{background:linear-gradient(180deg,var(--obsidian),#0d0d12 30%,var(--obsidian))}
+.villtabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:34px}
+.villtabs button{background:none;border:1px solid var(--line);color:var(--ash);cursor:pointer;font:inherit;
+  font-size:12.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;padding:11px 22px;transition:all .3s}
+.villtabs button:hover{color:#fff;border-color:rgba(255,255,255,.35)}
+.villtabs button.on{color:#fff;border-color:var(--crimson);background:rgba(168,17,45,.14)}
+.villstage{position:relative;min-height:420px;border:1px solid var(--line);border-radius:4px;overflow:hidden;display:grid}
+.vpanel{grid-area:1/1;display:none;padding:clamp(28px,5vw,56px);position:relative;overflow:hidden}
+.vpanel.on{display:block;animation:vfade .6s ease both}
+@keyframes vfade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.vpanel .kanji{position:absolute;right:-2%;bottom:-18%;font-size:clamp(180px,30vw,340px);font-weight:900;line-height:1;opacity:.07;pointer-events:none;font-family:var(--serif)}
+.vpanel h3{font-size:clamp(26px,4vw,40px);font-weight:900;letter-spacing:.05em;margin-bottom:4px}
+.vpanel .vp-sub{color:var(--ash);font-size:12px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:18px}
+.vpanel p{color:var(--ash);max-width:58ch}
+.vpanel .vbuild{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
+.vpanel .vbuild span{border:1px solid var(--line);color:var(--paper);font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:6px 13px;border-radius:2px}
+.vleaf{background:linear-gradient(135deg,#0d1a10 0%,#0a0a0c 70%)}
+.vleaf .kanji{color:#3f7a4b}
+.vsand{background:linear-gradient(135deg,#1d150a 0%,#0a0a0c 70%)}
+.vsand .kanji{color:#a9823c}
+.vmist{background:linear-gradient(135deg,#0a1420 0%,#0a0a0c 70%)}
+.vmist .kanji{color:#3d6e8f}
+.vcloud{background:linear-gradient(135deg,#131322 0%,#0a0a0c 70%)}
+.vcloud .kanji{color:#6f6fb0}
+.vstone{background:linear-gradient(135deg,#1a1410 0%,#0a0a0c 70%)}
+.vstone .kanji{color:#8f6f52}
+
+/* ---------- updates ---------- */
+.upd-hero{border:1px solid var(--line);border-left:3px solid var(--crimson);background:var(--charcoal);
+  padding:clamp(24px,4vw,40px);margin-bottom:44px}
+.upd-hero .verline{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.upd-hero h3{font-size:clamp(28px,4vw,44px);font-weight:900;letter-spacing:.03em}
+.upd-hero .date{color:var(--ash);font-size:14px;letter-spacing:.08em}
+.pill{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  padding:5px 12px;border-radius:2px;border:1px solid var(--line);color:var(--ash)}
+.pill.live{border-color:rgba(96,180,120,.5);color:#7ed8a0;background:rgba(96,180,120,.08)}
+.pill.warn{border-color:rgba(200,22,54,.6);color:#ff7d92;background:rgba(168,17,45,.1)}
+.upd-hero p{color:var(--ash);margin-top:14px;max-width:70ch}
+.wipe{border:1px solid rgba(200,22,54,.45);background:rgba(168,17,45,.07);padding:18px 22px;margin:34px 0 44px;
+  font-size:15px;color:#f0d5d8}
+.wipe b{color:#ff96a8}
+.timeline{position:relative;padding-left:26px}
+.timeline::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:1px;background:linear-gradient(180deg,var(--crimson),rgba(255,255,255,.12))}
+.titem{position:relative;margin-bottom:10px}
+.titem::before{content:"";position:absolute;left:-26px;top:22px;width:9px;height:9px;border-radius:50%;
+  background:var(--obsidian);border:2px solid var(--ash)}
+.titem.major::before{border-color:var(--crimson-hi);background:var(--crimson)}
+.titem details{border:1px solid var(--line);background:var(--charcoal);transition:border-color .3s}
+.titem details:hover{border-color:rgba(255,255,255,.2)}
+.titem summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding:18px 22px}
+.titem summary::-webkit-details-marker{display:none}
+.titem summary .ver{font-weight:900;font-size:17px;letter-spacing:.04em;min-width:110px}
+.titem summary .ttl{color:var(--paper);font-weight:700;flex:1;min-width:200px}
+.titem summary .chev{color:var(--ash);font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+.titem details[open] summary{border-bottom:1px solid var(--line)}
+.titem details[open] .chev::after{content:" −"}
+.titem .chev::after{content:" +"}
+.titem .body{padding:18px 22px;color:var(--ash);font-size:15px}
+.titem .body ul{margin-left:18px}
+.titem .body li{margin:7px 0}
+.titem .body b{color:var(--paper)}
+.archnote{color:var(--ash);font-size:13.5px;margin-top:26px;letter-spacing:.04em}
+
+/* ---------- roadmap ---------- */
+.rpgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.rpcol{border:1px solid var(--line);background:var(--charcoal)}
+.rpcol header{padding:16px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.rpcol header .dot{width:8px;height:8px;border-radius:50%}
+.rpcol header b{font-size:12.5px;letter-spacing:.22em;text-transform:uppercase}
+.rpcol ul{list-style:none;padding:10px 12px}
+.rpcol li{border-top:1px solid transparent}
+.rpitem summary{list-style:none;cursor:pointer;padding:13px 10px;font-size:15px;font-weight:700;display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.rpitem summary::-webkit-details-marker{display:none}
+.rpitem summary:hover{color:#fff}
+.rpitem .more{padding:0 10px 14px;color:var(--ash);font-size:14px}
+.d-dev{background:#c81636}.d-plan{background:#8d8d99}.d-up{background:#a9823c}.d-done{background:#5fae7c}
+
+/* ---------- media ---------- */
 .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-@media(max-width:720px){.gal{grid-template-columns:1fr 1fr}}
-.gal img{width:100%;display:block;border-radius:12px;border:1px solid var(--line);cursor:zoom-in;transition:transform .15s}
-.gal img:hover{transform:scale(1.02)}
-.shot{position:relative}
-.shot figcaption{position:absolute;left:8px;bottom:8px;background:rgba(0,0,0,.65);color:#fff;font-size:12px;
-  padding:4px 10px;border-radius:999px}
-#lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:50;cursor:zoom-out}
-#lightbox img{max-width:94vw;max-height:90vh;border-radius:8px}
-.ver{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.pill{display:inline-block;background:rgba(63,185,80,.15);border:1px solid #2ea043;color:#7ee28e;
-  font-size:12px;font-weight:800;padding:3px 10px;border-radius:999px}
-.pill.down{background:rgba(255,77,77,.15);border-color:var(--red2);color:#ff9b9b}
-ul.clean{margin:10px 0 0;padding-left:20px;color:var(--dim)}
-ul.clean li{margin:6px 0}
-footer{border-top:1px solid var(--line);color:var(--dim);font-size:14px;padding:26px 0;text-align:center}
-footer .logo{font-size:16px}
+@media(max-width:760px){.gal{grid-template-columns:repeat(2,1fr)}}
+.gal figure{position:relative;margin:0;overflow:hidden;border-radius:3px;cursor:zoom-in;border:1px solid var(--line)}
+.gal img{width:100%;aspect-ratio:16/10;object-fit:cover;transition:transform .7s cubic-bezier(.2,.6,.2,1),opacity .4s}
+.gal figure:hover img{transform:scale(1.06)}
+.gal figcaption{position:absolute;left:10px;bottom:10px;background:rgba(8,8,10,.72);color:#fff;font-size:11.5px;
+  letter-spacing:.14em;text-transform:uppercase;padding:5px 12px;border-radius:2px;opacity:0;transition:opacity .3s}
+.gal figure:hover figcaption{opacity:1}
+#lightbox{position:fixed;inset:0;z-index:120;background:rgba(6,6,8,.96);display:none;align-items:center;justify-content:center;flex-direction:column;gap:18px}
+#lightbox.on{display:flex}
+#lightbox img{max-width:92vw;max-height:78vh;border:1px solid var(--line)}
+#lightbox .cap{color:var(--ash);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase}
+#lightbox button{position:absolute;top:50%;transform:translateY(-50%);background:none;border:1px solid var(--line);
+  color:#fff;font-size:22px;width:46px;height:46px;cursor:pointer;transition:border-color .3s}
+#lightbox button:hover{border-color:#fff}
+#lb-prev{left:18px}#lb-next{right:18px}#lb-x{position:absolute;top:18px;right:18px;transform:none}
+.trailer{margin-top:clamp(36px,5vw,56px)}
+.trailer video{width:100%;aspect-ratio:16/9;background:#000;border:1px solid var(--line);border-radius:4px}
+.mnote{color:var(--ash);font-size:13.5px;margin-top:12px}
+
+/* ---------- play ---------- */
+#playsec{background:linear-gradient(180deg,var(--obsidian),#100c0e 45%,var(--obsidian))}
+.launchbox{border:1px solid var(--line);background:var(--charcoal);padding:clamp(24px,4vw,44px);text-align:center}
+.launchbox h3{font-size:clamp(24px,3.4vw,36px);font-weight:900;letter-spacing:.05em}
+.launchbox .lv{color:var(--ash);font-size:12.5px;letter-spacing:.28em;text-transform:uppercase;margin:10px 0 26px}
+#gamewrap{position:relative;width:100%;aspect-ratio:16/10;background:#000;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+#gamewrap iframe{width:100%;height:100%;border:0;display:none}
+#gamewrap.on iframe{display:block}
+#launchload{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#0a0a0c;z-index:2}
+#launchload .ring{width:52px;height:52px;border:2px solid rgba(255,255,255,.14);border-top-color:var(--crimson-hi);border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#launchload .st{color:var(--ash);font-size:12px;letter-spacing:.3em;text-transform:uppercase}
+.launchrow{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.playnote{color:var(--ash);font-size:14px;margin-top:16px}
+.playnote a{color:#ff96a8}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding:clamp(44px,6vw,70px) 0 34px}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:clamp(24px,5vw,60px);margin-bottom:40px}
+@media(max-width:760px){.fgrid{grid-template-columns:1fr}}
+.fgrid .flogo{font-weight:900;font-size:24px;letter-spacing:.12em;color:#fff}
+.fgrid .flogo em{font-style:normal;color:#e33}
+.fgrid p{color:var(--ash);font-size:14px;margin-top:10px;max-width:40ch}
+.fcol b{display:block;font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--ash);margin-bottom:14px}
+.fcol a{display:block;color:var(--paper);text-decoration:none;font-size:14.5px;padding:4px 0;transition:color .25s}
+.fcol a:hover{color:#ff96a8}
+.fbase{border-top:1px solid var(--line);padding-top:22px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;color:var(--ash);font-size:13px}
 </style>
 </head>
 <body>
-<header><div class="wrap nav">
-  <div class="logo">SHINOBI <em>LEGACY</em></div>
-  <nav id="tabs">
-    <button data-t="home" class="on">Home</button>
-    <button data-t="play">Play</button>
-    <button data-t="sneak">Sneak Peek</button>
-    <button data-t="updates">Updates</button>
-    <button data-t="roadmap">Roadmap</button>
-  </nav>
-</div></header>
 
-<div class="banner"><div class="wrap">game servers are down for an update right now, check the Updates tab</div></div>
+<nav id="top">
+  <div style="display:flex;align-items:baseline"><a class="logo" href="#home">SHINOBI <em>LEGACY</em></a><span class="brandmark">Official Site</span></div>
+  <button id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div id="navlinks">
+    <a href="#home">Home</a>
+    <a href="#game">The Game</a>
+    <a href="#world">World</a>
+    <a href="#updates">Updates</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#media">Media</a>
+    <a href="#playsec" class="play">Play</a>
+  </div>
+</nav>
 
-<section id="home" class="on"><div class="wrap">
-  <div class="hero">
-    <div class="kicker">A 3D NINJA BROWSER GAME</div>
+<!-- HERO -->
+<section id="home">
+  <div id="herobg"></div>
+  <div class="fog f1"></div><div class="fog f2"></div>
+  <div class="hero-in">
+    <div class="kicker">A 3D Ninja Browser MMORPG</div>
     <h1>SHINOBI <em>LEGACY</em></h1>
-    <p>Your legacy begins here. Forge your ninja, master the blade, and carve your name into the shinobi world.</p>
+    <div class="tagline">YOUR LEGACY BEGINS HERE.</div>
     <div class="btnrow">
-      <button class="btn" onclick="go('play')">Play Now</button>
-      <button class="btn ghost" onclick="go('sneak')">See the Sneak Peek</button>
+      <a class="btn" href="#playsec">Enter the World</a>
+      <a class="btn ghost" href="#game">Explore the Game</a>
     </div>
-    <div class="stats">
-      <div class="stat"><b>v1.122.0</b><span>current version</span></div>
-      <div class="stat"><b>3D</b><span>browser world</span></div>
-      <div class="stat"><b>100%</b><span>free to play</span></div>
+    <div class="hversion">Current build <b>v1.122.0</b> &middot; free to play</div>
+  </div>
+  <div class="scrolldot"></div>
+</section>
+
+<!-- THE GAME -->
+<section class="block" id="game"><div class="wrap">
+  <div class="sechead reveal">
+    <span class="kicker">The Game</span>
+    <h2>One world. <em>Every path.</em></h2>
+    <p>Shinobi Legacy is a 3D open-world ninja game that runs straight in your browser. No downloads, no install. Pick your village, forge your shinobi, and carve a name the world remembers.</p>
+    <div class="rule"></div>
+  </div>
+
+  <div class="feat reveal">
+    <div class="featimg"><img src="assets/battlefield.jpg" alt="A burning battlefield between two shinobi" loading="lazy"><span class="tag">Intro cinematic</span></div>
+    <div>
+      <h3>Open-world exploration</h3>
+      <p>Roam a full 3D shinobi world built for the browser: village streets, training grounds, wild forests and forgotten ruins. Landmarks like the Hollow Ruins in Emberwood and the Sealing Crater hide quests, bosses and secrets worth finding.</p>
+      <ul><li>Five enterable villages</li><li>Landmarks, ruins and hidden locations</li><li>Runs on PC and phone</li></ul>
     </div>
   </div>
-  <div class="grid2">
-    <div class="card"><h3>Fight</h3><p class="sub" style="margin:0">Face down rival shinobi in the arena and settle it with steel and jutsu.</p></div>
-    <div class="card"><h3>Legacy</h3><p class="sub" style="margin:0">Limited retired gear events and a world that keeps growing with every update.</p></div>
+
+  <div class="feat reveal">
+    <div class="featimg"><img src="assets/clash.jpg" alt="Crimson and Violet mid clash with chakra bursting" loading="lazy"><span class="tag">Intro cinematic</span></div>
+    <div>
+      <h3>Combat with real weight</h3>
+      <p>Every move has cast flashes, trails and impact sparks keyed to your element. Bosses wind up with visible tells you can dodge, stagger under big hits, and change pace under half health.</p>
+      <ul><li>Jutsu with per-element VFX and SFX</li><li>Hit-stop, camera shake and synthesized hits</li><li>Dodge, block, combo and counter</li></ul>
+    </div>
+  </div>
+
+  <div class="feat reveal">
+    <div class="featimg"><img src="assets/violet-close.jpg" alt="Violet, white hair and glowing eyes" loading="lazy"><span class="tag">Intro cinematic</span></div>
+    <div>
+      <h3>Clans &amp; bloodlines</h3>
+      <p>Choose from a deep clan roster, each with its own clan arts on Shift+1 through Shift+4, unlocked as clan mastery grows. Awakening eye lines like the Sharingan, Byakugan, Rinnegan and more each carry real abilities that drain your chakra while they're on.</p>
+      <ul><li>Every clan has its own 4-move clan bar</li><li>Real eye abilities with costs</li><li>Hidden clans exist in the world</li></ul>
+    </div>
+  </div>
+
+  <div class="feat reveal">
+    <div class="featimg"><img src="assets/power-up.jpg" alt="Chakra flaring around a fighter" loading="lazy"><span class="tag">Intro cinematic</span></div>
+    <div>
+      <h3>Jutsu, elements &amp; transformation</h3>
+      <p>Ten ability slots, elemental mastery, tailed-beast sync that cuts beast cooldowns by up to 45%, and transformations with their own cinematics and moves. Roll your nature from the spin, then master it.</p>
+      <ul><li>10 ability slots with synced cooldowns</li><li>Tailed beast inner realms per beast</li><li>Transformation cinematics</li></ul>
+    </div>
+  </div>
+
+  <div class="feat reveal">
+    <div class="featimg"><img src="assets/final-form.jpg" alt="A giant chakra avatar facing a nine tailed beast" loading="lazy"><span class="tag">Intro cinematic</span></div>
+    <div>
+      <h3>Customization &amp; gear</h3>
+      <p>Build your shinobi in the character creator with live 3D hair previews, then equip real 3D gear: masks, hats, hoods, cloaks, armor and weapons that show on your character for everyone and genuinely cut incoming damage.</p>
+      <ul><li>Full character creator</li><li>3D armor, masks, cloaks and weapons</li><li>New gear slots: face, shoulders, arms, back</li></ul>
+    </div>
+  </div>
+
+  <div class="minifeats reveal">
+    <div class="minifeat"><b>Boss battles</b><span>Guardians with combos, ranged jutsu, ground slams and beam attacks.</span></div>
+    <div class="minifeat"><b>Missions &amp; bounties</b><span>Quest trackers, map pins and waypoint arrows for every objective.</span></div>
+    <div class="minifeat"><b>Village life</b><span>Armories, forges, bazaars, hospitals and Kage offices in every village.</span></div>
+    <div class="minifeat"><b>PvP</b><span>Settle it with rivals: steel, jutsu and skill.</span></div>
+    <div class="minifeat"><b>Secrets</b><span>Hidden clans, rare discoveries and rewards for the curious.</span></div>
+    <div class="minifeat"><b>Going rogue</b><span>Cut your headband in a cinematic and walk out a rogue.</span></div>
   </div>
 </div></section>
 
-<section id="play"><div class="wrap">
-  <h2><span class="jp">PREPARE FOR BATTLE</span>Play the Game</h2>
-  <p class="sub">Runs right in your browser, PC or phone. Loading the game below.</p>
-  <div class="framebox"><iframe id="gameframe" data-src="https://shinobi-legacy.sites.tab.bot" title="Shinobi Legacy game" allow="fullscreen; autoplay; gamepad" loading="lazy"></iframe></div>
-  <p class="note">Game not loading? Open it full size at <a href="https://shinobi-legacy.sites.tab.bot" target="_blank" rel="noopener">shinobi-legacy.sites.tab.bot</a>.</p>
-</div></section>
-
-<section id="sneak"><div class="wrap">
-  <h2><span class="jp">COME TAKE A LOOK</span>Sneak Peek</h2>
-  <p class="sub">Straight from the intro cinematic. Tap any shot to zoom.</p>
-  <div class="gal">
-    <figure class="shot" style="margin:0"><img src="assets/battlefield.jpg" alt="A burning battlefield between two shinobi" loading="lazy"><figcaption>The battlefield</figcaption></figure>
-    <figure class="shot" style="margin:0"><img src="assets/violet-close.jpg" alt="Violet, white hair and glowing eyes" loading="lazy"><figcaption>Violet</figcaption></figure>
-    <figure class="shot" style="margin:0"><img src="assets/clash.jpg" alt="Crimson and Violet mid clash with chakra bursting" loading="lazy"><figcaption>The clash</figcaption></figure>
-    <figure class="shot" style="margin:0"><img src="assets/power-up.jpg" alt="Chakra flaring around a fighter" loading="lazy"><figcaption>Power up</figcaption></figure>
-    <figure class="shot" style="margin:0"><img src="assets/final-form.jpg" alt="A giant chakra avatar facing a nine tailed beast" loading="lazy"><figcaption>Final form</figcaption></figure>
-    <figure class="shot" style="margin:0"><img src="assets/title-card.jpg" alt="Shinobi Legacy title card" loading="lazy"><figcaption>Title card</figcaption></figure>
+<!-- WORLD -->
+<section class="block" id="world"><div class="wrap">
+  <div class="sechead reveal">
+    <span class="kicker">The World</span>
+    <h2>Five villages. <em>One map.</em></h2>
+    <p>Every village is a place you can walk, enter and fight for. Pick one to see what's inside.</p>
+    <div class="rule"></div>
+  </div>
+  <div class="villtabs reveal" id="villtabs">
+    <button data-v="leaf" class="on">Leaf</button>
+    <button data-v="sand">Sand</button>
+    <button data-v="mist">Mist</button>
+    <button data-v="cloud">Cloud</button>
+    <button data-v="stone">Stone</button>
+  </div>
+  <div class="villstage reveal" id="villstage">
+    <div class="vpanel vleaf on" data-v="leaf">
+      <div class="kanji">葉</div>
+      <h3>The Hidden Leaf</h3><div class="vp-sub">Village Hidden in the Leaves</div>
+      <p>The heart of the world. Train at a full-size Academy, climb toward the Kage office, and stock up at the Leaf Armory. Earn the Will of Fire headband and the Hokage's Seal through its trials.</p>
+      <div class="vbuild"><span>Academy</span><span>Kage Office</span><span>Armory</span><span>Hospital</span><span>Trial of the Hokage</span></div>
+    </div>
+    <div class="vpanel vsand" data-v="sand">
+      <div class="kanji">砂</div>
+      <h3>The Hidden Sand</h3><div class="vp-sub">Village Hidden in the Sand</div>
+      <p>A desert hold built on trade and wind. Browse the Sand Bazaar, take the strings of its puppet quests, and prove yourself in the Trial of the Kazekage.</p>
+      <div class="vbuild"><span>Bazaar</span><span>Quests</span><span>Trial of the Kazekage</span></div>
+    </div>
+    <div class="vpanel vmist" data-v="mist">
+      <div class="kanji">霧</div>
+      <h3>The Hidden Mist</h3><div class="vp-sub">Village Hidden in the Mist</div>
+      <p>Fog, docks and steel. The Mist Forge turns out blades like the Tide Edge, the docks lead to the water, and Kenji's Edge is a blade worth earning.</p>
+      <div class="vbuild"><span>Mist Forge</span><span>Docks</span><span>Trial of the Mizukage</span></div>
+    </div>
+    <div class="vpanel vcloud" data-v="cloud">
+      <div class="kanji">雲</div>
+      <h3>The Hidden Cloud</h3><div class="vp-sub">Village Hidden in the Clouds</div>
+      <p>High ground and lightning. The Cloud Forge strikes Thunder Gauntlets and Storm Plate, and Denki's Lightning Steel is proof you can carry the storm.</p>
+      <div class="vbuild"><span>Cloud Forge</span><span>Quests</span><span>Trial of the Raikage</span></div>
+    </div>
+    <div class="vpanel vstone" data-v="stone">
+      <div class="kanji">岩</div>
+      <h3>The Hidden Stone</h3><div class="vp-sub">Village Hidden in the Stone</div>
+      <p>Unbreakable country. Outfit at the Stone Outfitters, swing the Earthshaker Hammer, and take the Tsuchikage's Crest if the mountain allows it.</p>
+      <div class="vbuild"><span>Outfitters</span><span>Quests</span><span>Trial of the Tsuchikage</span></div>
+    </div>
   </div>
 </div></section>
 
-<section id="updates"><div class="wrap">
-  <h2><span class="jp">STAY SHARP</span>Updates &amp; Version</h2>
-  <p class="sub">Everything you need to know about where the game is right now.</p>
-  <div class="card">
-    <div class="ver"><h3 style="margin:0">v1.122.0</h3><span class="pill down">servers down for an update</span></div>
-    <ul class="clean">
-      <li><b>Current version:</b> v1.122.0, shipped Nov 12, 2026</li>
-      <li><b>Last live build:</b> Nov 11, 2026, about 10:21 PM CT</li>
-      <li><b>Retired items:</b> live in game since Nov 11, 2026, 6:50 PM CT</li>
-    </ul>
+<!-- UPDATES -->
+<section class="block" id="updates"><div class="wrap">
+  <div class="sechead reveal">
+    <span class="kicker">Update Log</span>
+    <h2>Patch <em>history.</em></h2>
+    <p>The real record of what shipped, newest first. Tap any version for its notes.</p>
+    <div class="rule"></div>
   </div>
-  <div class="warn"><b>Heads up for the next update:</b> it comes with a FULL SAVE WIPE. Every save starts fresh, so enjoy the grind while it lasts.</div>
-  <div class="card"><h3>What recent updates brought</h3>
-    <ul class="clean">
-      <li>Clan bar and retired gear events</li>
-      <li>Polished world and combat feel</li>
-      <li>Ongoing performance passes between versions</li>
-    </ul>
+
+  <div class="upd-hero reveal">
+    <div class="verline">
+      <h3>v1.122.0</h3>
+      <span class="pill live">Latest</span>
+      <span class="date">shipped Nov 12, 2026 &middot; ~10:35 AM CT</span>
+    </div>
+    <p>The current main build. Last live run: Nov 11, ~10:21 PM CT. The tab website is down for an update while the new Story Mode build is finished, so no new patches land until it's back up.</p>
+  </div>
+
+  <div class="wipe reveal"><b>Heads up:</b> v1.121.0 comes with a FULL SAVE RESET. Every save starts fresh when it drops. Enjoy the grind while it lasts.</div>
+
+  <div class="timeline">
+    <div class="titem major reveal"><details open>
+      <summary><span class="ver">v1.120.25</span><span class="ttl">Sealing pin, quest markers, elements from the spin</span><span class="chev">Notes</span></summary>
+      <div class="body"><ul>
+        <li><b>Sealing quest:</b> the tracker and map pin point at the real shrine in the Sealing Crater.</li>
+        <li><b>Quest markers:</b> every marker, including the Mist / Stone / Sand course rings, points at the right spot.</li>
+        <li><b>Elements from the spin only:</b> new characters spin first, no free Fireball / Wind Blade.</li>
+        <li><b>Uchiha:</b> Fire-natured Uchiha get +15% Fire damage.</li>
+        <li><b>Goku Clan moved off the Naruto world:</b> free clan reroll if you had it, Goku data kept.</li>
+        <li><b>Tracker fixes:</b> clan / beast / Goku goals only get a marker when picked, titles wrap, the waypoint arrow hides in menus, untracking clears the arrow, Renji's light is wider, training logs stay put when hit, and the tracker + inner realms load on the live site.</li>
+      </ul></div>
+    </details></div>
+
+    <div class="titem reveal"><details>
+      <summary><span class="ver">v1.120.24</span><span class="ttl">Quest trackers, waypoints, inner realms, voiced intro</span><span class="chev">Notes</span></summary>
+      <div class="body"><ul>
+        <li><b>Quest trackers + waypoints (24i):</b> every quest and bounty gets a HUD tracker under the minimap, an edge arrow with distance, and a minimap pin. Borrowed Light: Renji's violet light is huge and shows through fog, pointing to the Hollow Ruins in northwest Emberwood. Rin's last scroll fixed.</li>
+        <li><b>Stat points fix (24h):</b> no more black screen when spending points; spend any amount at once (+1 / +5 / +10 / Max).</li>
+        <li><b>Inner Realm upgrade (24f):</b> a unique mindscape for every tailed beast, with its own sky, fog, water or ground, a seal gate that burns open, the full beast, and ambient sound.</li>
+        <li><b>New intro voices + final clash (24e):</b> the intro is re-voiced, the final beams meet head-on and knock both fighters out of their forms, and every Goku Clan form has power-up screams and aura sounds.</li>
+        <li><b>Voiced intro dialogue (24c):</b> Crimson and Violet talk through the intro, fully voiced and subtitled, about 56 s with every sword clash kept.</li>
+        <li><b>Clan quests + more quest XP (24):</b> the Clan button opens clan quest lines, about 2.5&ndash;4x more XP from every kind of quest.</li>
+      </ul></div>
+    </details></div>
+
+    <div class="titem reveal"><details>
+      <summary><span class="ver">v1.120.23</span><span class="ttl">Secret Mythic Goku Clan, intro polish, Goku fixes</span><span class="chev">Notes</span></summary>
+      <div class="body"><ul>
+        <li><b>Secret Mythic Goku Clan (23):</b> hidden in the world, never rollable. Seven forms from Base to Ultra Instinct, each with a full transformation cinematic and its own moves.</li>
+        <li><b>Intro polish (23b):</b> real katanas, spark bursts and a metal clang on all 13 sword clashes, layered fire on the battlefield.</li>
+        <li><b>Goku Clan fixes (23c):</b> power down from Ultra Instinct with T, owner Grant asks for the owner code, apples sit on the ground, Goku's hair fits the head.</li>
+      </ul></div>
+    </details></div>
+
+    <div class="titem reveal"><details>
+      <summary><span class="ver">v1.120.22</span><span class="ttl">Real eye abilities + gear polish</span><span class="chev">Notes</span></summary>
+      <div class="body"><ul>
+        <li><b>Real eye abilities:</b> Sharingan Copy / Predict path, Byakugan X-ray chakra vision, and a signature power for every eye. Toggle with O; chakra drains while it's on.</li>
+        <li><b>Gear polish:</b> hair tucks under hats, the headband sits above the eyes, the Ember Fox Mask has a snout, ears and back strap, and the Crimson Scale Cuirass is crimson on the front too.</li>
+      </ul></div>
+    </details></div>
+
+    <div class="titem reveal"><details>
+      <summary><span class="ver">v1.120.21</span><span class="ttl">Brand-new intro cinematic</span><span class="chev">Notes</span></summary>
+      <div class="body"><ul>
+        <li>A new intro cinematic plays once per session. Settings &rarr; Play intro On / Off, and skip it with the Skip button, any key, or a tap.</li>
+      </ul></div>
+    </details></div>
+
+    <div class="titem reveal"><details>
+      <summary><span class="ver">v1.120.20</span><span class="ttl">Luck Boost, main-menu admin, hidden event drops</span><span class="chev">Notes</span></summary>
+      <div class="body"><ul>
+        <li><b>Luck Boost:</b> owner-set multiplier up to x1,000,000 with a timer, for the whole server or one device, with a live banner and toast. Boosts clan spins and element rolls, never the secret Goku clan odds.</li>
+        <li><b>Admin from the main menu:</b> God Mode opens on the main menu too.</li>
+        <li><b>Hidden event drops:</b> crates dropped anywhere other than Near me are hidden, visible only within 25 m, with a new Random spot option.</li>
+      </ul></div>
+    </details></div>
+
+    <div class="titem reveal"><details>
+      <summary><span class="ver">v1.120.12 &ndash; .17</span><span class="ttl">Enterable buildings, 3D gear, retired items cleanup</span><span class="chev">Notes</span></summary>
+      <div class="body"><ul>
+        <li><b>Enterable village buildings (12):</b> walk up to a door and press E to go in, in all five villages: a much bigger Academy, the Kage office with a become-Kage path, the Armory, and the Hospital you respawn at.</li>
+        <li><b>Trae's own 3D gear (14):</b> 26 pieces, visible on your shinobi for everyone, with real damage reduction. New Face, Shoulder, Arms and Back (cloak) slots.</li>
+        <li><b>Retired items (17):</b> 35 icon-only weapons and accessories removed, owners refunded in ryo, the Academy Kunai swapped for the 3D Field Kunai, and quests that gave one now give a 3D piece. Live on the main game since Nov 11, ~6:50 PM CT.</li>
+      </ul></div>
+    </details></div>
+
+    <div class="titem reveal"><details>
+      <summary><span class="ver">v1.120.13</span><span class="ttl">New UI look + clan eyes</span><span class="chev">Notes</span></summary>
+      <div class="body"><ul>
+        <li><b>New UI:</b> a crimson + charcoal Settings panel with left tabs, the same panel on the main menu and in game, a restyled HUD with a compass ring minimap and red-framed hotbar, and an Exit to Main Menu button that saves first.</li>
+        <li><b>Clan eyes:</b> each eye is locked to its home clan with its own evolution path: Uchiha Sharingan &rarr; Mangekyo &rarr; Eternal, Hyuga / Otsutsuki Byakugan &rarr; Tenseigan, Otsutsuki Rinnegan, Gojo Six Eyes &rarr; Boundless Horizon, and more.</li>
+      </ul></div>
+    </details></div>
+
+    <div class="titem reveal"><details>
+      <summary><span class="ver">v1.120.7 &ndash; .11</span><span class="ttl">Clan bar, bosses that fight, VFX, rogue path, performance</span><span class="chev">Notes</span></summary>
+      <div class="body"><ul>
+        <li><b>Clan bar (7):</b> Shift+1 to Shift+4, every clan with its own four arts unlocked at clan mastery 1 / 3 / 5 / 7.</li>
+        <li><b>Performance (9):</b> new Auto graphics quality with an FPS display, plus shader precompiling and off-screen animation skips.</li>
+        <li><b>Going rogue (8):</b> leave your village from its Village tab, slash your band in a cinematic, carry a ROGUE tag, and come home after 10 minutes for 1,000 ryo.</li>
+        <li><b>Bosses actually fight (11):</b> 2&ndash;3 hit combos with dodgeable wind-ups, ranged jutsu, ground slams with a red warning circle, dash strikes and beam attacks, plus Phase 2 speed under 50% HP.</li>
+        <li><b>VFX + SFX on every move (10):</b> element-colored casts, projectile trails, per-element impact sparks, hit-stop and camera shake that scale with your graphics quality.</li>
+        <li><b>New character creator (3):</b> bottom tabs, live 3D hair previews, randomize + undo, name check.</li>
+      </ul></div>
+    </details></div>
+  </div>
+  <p class="archnote">Full changelog lives in the Shinobi Legacy status doc. Older v1.120.x entries are archived there.</p>
+</div></section>
+
+<!-- ROADMAP -->
+<section class="block" id="roadmap"><div class="wrap">
+  <div class="sechead reveal">
+    <span class="kicker">Roadmap</span>
+    <h2>Where the world <em>goes next.</em></h2>
+    <p>What's being built, what's planned, and what's already shipped. Nothing here is invented: statuses come straight from the development doc.</p>
+    <div class="rule"></div>
+  </div>
+  <div class="rpgrid">
+    <div class="rpcol reveal">
+      <header><span class="dot d-dev"></span><b>In Development</b></header>
+      <ul>
+        <li class="rpitem"><details><summary>Bleach world + Soul Reaper race</summary><div class="more">Being built right now, with pictures in the sneak peeks. A whole new world and playable race.</div></details></li>
+        <li class="rpitem"><details><summary>New body models</summary><div class="more">New boy and girl body models by Trae: a new Model option in the character creator, using all existing animations, with hair that hides under hats and hoods.</div></details></li>
+        <li class="rpitem"><details><summary>Busier villages</summary><div class="more">More NPCs in all five villages doing real activities: eating at the ramen counter, smiths at the forge, shopkeepers, sparring, kids.</div></details></li>
+        <li class="rpitem"><details><summary>Rimuru Quest 5: The Ultimate Existence</summary><div class="more">A three-phase guardian boss (Vael), a mastery checklist, an awakening, and an ultimate form.</div></details></li>
+        <li class="rpitem"><details><summary>Gojo + Toji clans</summary><div class="more">Coming to the build alongside Rimuru Quest 5.</div></details></li>
+      </ul>
+    </div>
+    <div class="rpcol reveal">
+      <header><span class="dot d-plan"></span><b>Planned</b></header>
+      <ul>
+        <li class="rpitem"><details><summary>Academy, AI squad &amp; progression</summary><div class="more">Start as an Academy Student, pass a five-stage graduation exam, discover your chakra natures, earn your rank from Genin to Kage-Level, and run missions with your own persistent AI three-man squad and sensei.</div></details></li>
+        <li class="rpitem"><details><summary>Ultimate world expansion</summary><div class="more">Summoning contracts, stealth missions, weapon forging with legendary weapons, secret organizations, player-owned property, elemental mastery combos, traveling merchants, dynamic missions, clan wars, tournaments, duels and verified leaderboards.</div></details></li>
+        <li class="rpitem"><details><summary>Secret bloodline awakenings</summary><div class="more">Dormant potential discovered through NPCs, scrolls, hidden places and world events. Earned, never random.</div></details></li>
+        <li class="rpitem"><details><summary>The world's unknown strongest</summary><div class="more">A mysterious, extremely powerful NPC who travels the world, observes players, and offers a difficult multi-phase challenge to those who find him.</div></details></li>
+      </ul>
+    </div>
+    <div class="rpcol reveal">
+      <header><span class="dot d-done"></span><b>Recently Shipped</b></header>
+      <ul>
+        <li class="rpitem"><details><summary>Retired items cleanup (v1.120.17)</summary><div class="more">35 icon-only weapons and accessories removed with ryo refunds, Academy Kunai swapped for the 3D Field Kunai. Live since Nov 11, ~6:50 PM CT.</div></details></li>
+        <li class="rpitem"><details><summary>Enterable village buildings (v1.120.12)</summary><div class="more">Academy, Kage office, Armory and Hospital in all five villages.</div></details></li>
+        <li class="rpitem"><details><summary>Voiced intro + eye abilities (v1.120.24c / .22)</summary><div class="more">Fully voiced, subtitled intro and real eye ability paths for every clan eye.</div></details></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wipe reveal" style="margin-top:34px"><b>Known issues being tracked:</b> a grey band on the gorge walls, Mist and Cloud still looking generic (first pass), and you can't land on roofs yet.</div>
+</div></section>
+
+<!-- MEDIA -->
+<section class="block" id="media"><div class="wrap">
+  <div class="sechead reveal">
+    <span class="kicker">Media</span>
+    <h2>Sneak <em>peek.</em></h2>
+    <p>Stills from the official intro cinematic, straight from the game. Tap any shot to view it full screen.</p>
+    <div class="rule"></div>
+  </div>
+  <div class="gal reveal">
+    <figure><img src="assets/battlefield.jpg" alt="A burning battlefield between two shinobi" loading="lazy"><figcaption>The battlefield</figcaption></figure>
+    <figure><img src="assets/violet-close.jpg" alt="Violet, white hair and glowing eyes" loading="lazy"><figcaption>Violet</figcaption></figure>
+    <figure><img src="assets/clash.jpg" alt="Crimson and Violet mid clash with chakra bursting" loading="lazy"><figcaption>The clash</figcaption></figure>
+    <figure><img src="assets/power-up.jpg" alt="Chakra flaring around a fighter" loading="lazy"><figcaption>Power up</figcaption></figure>
+    <figure><img src="assets/final-form.jpg" alt="A giant chakra avatar facing a nine tailed beast" loading="lazy"><figcaption>Final form</figcaption></figure>
+    <figure><img src="assets/title-card.jpg" alt="Shinobi Legacy title card" loading="lazy"><figcaption>Title card</figcaption></figure>
+  </div>
+  <div class="trailer reveal">
+    <video src="assets/intro.mp4" controls playsinline preload="metadata" poster="assets/title-card.jpg"></video>
+    <p class="mnote">The official intro, remastered at 1080p. Stills above are from this cinematic, not gameplay footage.</p>
   </div>
 </div></section>
 
-<section id="roadmap"><div class="wrap">
-  <h2><span class="jp">THE PATH AHEAD</span>Roadmap</h2>
-  <p class="sub">What's planned for the world of Shinobi Legacy.</p>
-  <div class="grid2">
-    <div class="card"><h3>Academy &amp; AI squads</h3><p class="sub" style="margin:0">Start as an Academy Student, pass a five stage graduation exam, earn your rank, and run missions with your own AI three man squad and sensei.</p></div>
-    <div class="card"><h3>World expansion</h3><p class="sub" style="margin:0">Summoning contracts, stealth missions, weapon forging, player property, traveling merchants, and a bigger connected world.</p></div>
-    <div class="card"><h3>New main menu</h3><p class="sub" style="margin:0">A full holographic style menu redesign for desktop and mobile.</p></div>
-    <div class="card"><h3>Injury system</h3><p class="sub" style="margin:0">Permanent injuries with a cost: lose an arm or an eye in battle and master a one handed or blind warrior path.</p></div>
-    <div class="card"><h3>Multiplayer ambitions</h3><p class="sub" style="margin:0">Clan wars, squads, tournaments, territory control, duels, and verified leaderboards.</p></div>
-    <div class="card"><h3>More ways to grow</h3><p class="sub" style="margin:0">Elemental mastery combos, bloodline awakenings, lost villages, and secret organizations.</p></div>
+<div id="lightbox">
+  <button id="lb-x" aria-label="Close">&times;</button>
+  <button id="lb-prev" aria-label="Previous">&lsaquo;</button>
+  <img id="lbimg" alt="">
+  <div class="cap" id="lbcap"></div>
+  <button id="lb-next" aria-label="Next">&rsaquo;</button>
+</div>
+
+<!-- PLAY -->
+<section class="block" id="playsec"><div class="wrap">
+  <div class="sechead reveal">
+    <span class="kicker">Enter</span>
+    <h2>Launch <em>the game.</em></h2>
+    <div class="rule"></div>
+  </div>
+  <div class="launchbox reveal">
+    <h3>SHINOBI LEGACY</h3>
+    <div class="lv">Build v1.122.0 &middot; runs in your browser</div>
+    <div id="gamewrap">
+      <div id="launchload">
+        <div class="ring"></div>
+        <div class="st" id="loadst">Preparing the launch bay</div>
+      </div>
+      <iframe id="gameframe" data-src="https://shinobi-legacy.sites.tab.bot" title="Shinobi Legacy game" allow="fullscreen; autoplay; gamepad" loading="lazy"></iframe>
+    </div>
+    <div class="launchrow">
+      <button class="btn" id="loadgame">Launch Main Game</button>
+      <a class="btn ghost" href="https://shinobi-legacy.sites.tab.bot" target="_blank" rel="noopener">Open Full Size</a>
+      <a class="btn ghost" href="https://trae5.github.io/shinobi-sprint/" target="_blank" rel="noopener">Play the Test Build</a>
+    </div>
+    <p class="playnote">The main game lives on its own servers, which are down for an update right now, so it may not load until they're back. The test build above is playable while you wait.</p>
   </div>
 </div></section>
 
 <footer><div class="wrap">
-  <div class="logo">SHINOBI <em>LEGACY</em></div>
-  <div>Your legacy begins here. &copy; <span id="yr"></span> Shinobi Legacy</div>
+  <div class="fgrid">
+    <div>
+      <div class="flogo">SHINOBI <em>LEGACY</em></div>
+      <p>Your legacy begins here. A 3D ninja browser MMORPG, built and run by Trae.</p>
+    </div>
+    <div class="fcol">
+      <b>Site</b>
+      <a href="#game">The Game</a>
+      <a href="#world">World</a>
+      <a href="#updates">Updates</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#media">Media</a>
+    </div>
+    <div class="fcol">
+      <b>Play</b>
+      <a href="#playsec">Launch the game</a>
+      <a href="https://shinobi-legacy.sites.tab.bot" target="_blank" rel="noopener">Main game</a>
+      <a href="https://trae5.github.io/shinobi-sprint/" target="_blank" rel="noopener">Test build</a>
+    </div>
+  </div>
+  <div class="fbase">
+    <span>&copy; <span id="yr"></span> Shinobi Legacy</span>
+    <span>Build v1.122.0</span>
+  </div>
 </div></footer>
 
-<div id="lightbox"><img id="lbimg" alt=""></div>
-
 <script>
-var GAME_URL = "https://shinobi-legacy.sites.tab.bot";
-var loaded = false;
-document.getElementById("yr").textContent = new Date().getFullYear();
+(function(){
+  var nav=document.getElementById("top"),burger=document.getElementById("burger"),links=document.getElementById("navlinks");
+  var hero=document.getElementById("home"),bg=document.getElementById("herobg");
+  var reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-function go(t){
-  document.querySelectorAll("section").forEach(function(s){ s.classList.toggle("on", s.id===t); });
-  document.querySelectorAll("nav button").forEach(function(b){ b.classList.toggle("on", b.dataset.t===t); });
-  if(t==="play" && !loaded){
-    loaded = true;
-    document.getElementById("gameframe").src = GAME_URL;
+  document.getElementById("yr").textContent=new Date().getFullYear();
+
+  burger.addEventListener("click",function(){
+    var open=links.classList.toggle("open");
+    burger.classList.toggle("x",open);
+    document.body.style.overflow=open?"hidden":"";
+  });
+  links.querySelectorAll("a").forEach(function(a){
+    a.addEventListener("click",function(){
+      links.classList.remove("open");burger.classList.remove("x");document.body.style.overflow="";
+    });
+  });
+
+  function onScroll(){
+    nav.classList.toggle("solid",window.scrollY>40);
+    if(!reduced&&window.scrollY<window.innerHeight){
+      bg.style.transform="translateY("+(window.scrollY*0.25)+"px)";
+    }
   }
-  window.scrollTo({top:0, behavior:"smooth"});
-}
-document.querySelectorAll("nav button").forEach(function(b){ b.addEventListener("click", function(){ go(b.dataset.t); }); });
+  window.addEventListener("scroll",onScroll,{passive:true});onScroll();
 
-var lb = document.getElementById("lightbox"), lbimg = document.getElementById("lbimg");
-document.querySelectorAll(".gal img").forEach(function(img){
-  img.addEventListener("click", function(){ lbimg.src = img.src; lb.style.display = "flex"; });
-});
-lb.addEventListener("click", function(){ lb.style.display = "none"; });
-document.addEventListener("keydown", function(e){ if(e.key==="Escape") lb.style.display = "none"; });
+  // leaves
+  if(!reduced){
+    for(var i=0;i<14;i++){
+      var l=document.createElement("div");l.className="leaf";
+      l.style.left=(4+Math.random()*92)+"vw";
+      l.style.animationDuration=(9+Math.random()*10)+"s";
+      l.style.animationDelay=(-Math.random()*16)+"s";
+      l.style.transform="scale("+(0.6+Math.random()*0.9)+")";
+      hero.appendChild(l);
+    }
+  }
+
+  // active section in nav
+  var secs=["home","game","world","updates","roadmap","media","playsec"];
+  var secsEl=secs.map(function(id){return document.getElementById(id)});
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){
+        links.querySelectorAll("a").forEach(function(a){
+          a.classList.toggle("active",a.getAttribute("href")==="#"+e.target.id);
+        });
+      }
+    });
+  },{rootMargin:"-45% 0px -50% 0px"});
+  secsEl.forEach(function(s){if(s)io.observe(s)});
+
+  // reveal on scroll
+  var rio=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");rio.unobserve(e.target)}});
+  },{threshold:.12});
+  document.querySelectorAll(".reveal").forEach(function(el){rio.observe(el)});
+
+  // villages
+  var tabs=document.getElementById("villtabs"),stage=document.getElementById("villstage");
+  tabs.addEventListener("click",function(e){
+    var b=e.target.closest("button");if(!b)return;
+    tabs.querySelectorAll("button").forEach(function(x){x.classList.toggle("on",x===b)});
+    stage.querySelectorAll(".vpanel").forEach(function(p){p.classList.toggle("on",p.dataset.v===b.dataset.v)});
+  });
+
+  // gallery lightbox
+  var shots=[].slice.call(document.querySelectorAll(".gal figure"));
+  var lb=document.getElementById("lightbox"),lbimg=document.getElementById("lbimg"),lbcap=document.getElementById("lbcap"),idx=0;
+  function show(i){idx=(i+shots.length)%shots.length;var im=shots[idx].querySelector("img");lbimg.src=im.src;lbimg.alt=im.alt;lbcap.textContent=shots[idx].querySelector("figcaption").textContent}
+  shots.forEach(function(f,i){f.addEventListener("click",function(){show(i);lb.classList.add("on")})});
+  document.getElementById("lb-x").addEventListener("click",function(){lb.classList.remove("on")});
+  document.getElementById("lb-prev").addEventListener("click",function(){show(idx-1)});
+  document.getElementById("lb-next").addEventListener("click",function(){show(idx+1)});
+  lb.addEventListener("click",function(e){if(e.target===lb)lb.classList.remove("on")});
+  document.addEventListener("keydown",function(e){
+    if(!lb.classList.contains("on"))return;
+    if(e.key==="Escape")lb.classList.remove("on");
+    if(e.key==="ArrowLeft")show(idx-1);
+    if(e.key==="ArrowRight")show(idx+1);
+  });
+
+  // game launcher
+  var loadBtn=document.getElementById("loadgame"),frame=document.getElementById("gameframe"),wrap=document.getElementById("gamewrap"),st=document.getElementById("loadst"),loading=false;
+  loadBtn.addEventListener("click",function(){
+    if(loading)return;loading=true;
+    wrap.classList.remove("on");frame.style.display="none";
+    document.getElementById("launchload").style.display="flex";
+    st.textContent="Loading the world";
+    frame.src=frame.dataset.src;
+    var waited=0;
+    var t=setInterval(function(){
+      waited+=400;
+      try{if(frame.contentDocument&&frame.contentDocument.readyState==="complete"&&waited>1400){done();}}
+      catch(err){if(waited>2200){done();}}
+      if(waited>9000){done();}
+    },400);
+    function done(){
+      clearInterval(t);
+      st.textContent="Enter the world";
+      setTimeout(function(){
+        document.getElementById("launchload").style.display="none";
+        frame.style.display="block";wrap.classList.add("on");
+      },500);
+    }
+  });
+})();
 </script>
 </body>
 </html>
