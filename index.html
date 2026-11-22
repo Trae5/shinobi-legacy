@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Shinobi Legacy — Official Site</title>
 <meta name="description" content="Shinobi Legacy, a 3D ninja browser MMORPG. Explore five villages, master jutsu, forge your legacy.">
+<script>document.documentElement.className+=" js";</script>
 <style>
 :root{
   --obsidian:#0a0a0c; --charcoal:#121216; --ash:#8d8d99; --paper:#eceae6;
@@ -94,8 +95,8 @@ section.block{padding:clamp(72px,11vw,130px) 0;position:relative}
 .sechead h2 em{font-style:normal;color:#e33}
 .sechead p{color:var(--ash);max-width:640px;margin-top:12px}
 .rule{width:56px;height:2px;background:var(--crimson);margin-top:18px}
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.6,.2,1),transform .8s cubic-bezier(.2,.6,.2,1)}
-.reveal.in{opacity:1;transform:none}
+.js .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.6,.2,1),transform .8s cubic-bezier(.2,.6,.2,1)}
+.js .reveal.in{opacity:1;transform:none}
 
 /* ---------- the game : alternating features ---------- */
 .feat{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);align-items:center;margin-bottom:clamp(48px,7vw,96px)}
