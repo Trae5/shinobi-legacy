@@ -44,13 +44,24 @@ nav#top.solid{background:rgba(10,10,12,.88);backdrop-filter:blur(12px);border-bo
  #navlinks.open a{opacity:1;transform:none}
  #navlinks.open a:nth-child(2){transition-delay:.05s}#navlinks.open a:nth-child(3){transition-delay:.1s}
  #navlinks.open a:nth-child(4){transition-delay:.15s}#navlinks.open a:nth-child(5){transition-delay:.2s}
- #navlinks.open a:nth-child(6){transition-delay:.25s}#navlinks.open a:nth-child(7){transition-delay:.3s}}
+ #navlinks.open a:nth-child(6){transition-delay:.25s}#navlinks.open a:nth-child(7){transition-delay:.3s}
+ #navlinks.open a:nth-child(8){transition-delay:.35s}}
 #burger{display:none;background:none;border:0;cursor:pointer;padding:10px;z-index:99}
 #burger span{display:block;width:24px;height:2px;background:#fff;margin:5px 0;transition:transform .35s,opacity .3s}
 @media(max-width:860px){#burger{display:block}}
 #burger.x span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 #burger.x span:nth-child(2){opacity:0}
 #burger.x span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ---------- life unbound ---------- */
+.unlede{max-width:660px;color:var(--ash);font-size:15.5px}
+.unrow{margin-top:38px;border-top:1px solid var(--line)}
+.unrow>div{display:flex;gap:22px;padding:17px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.unrow b{color:var(--gold);font-family:var(--serif);font-size:16px;letter-spacing:.05em;min-width:210px}
+.unrow span{color:var(--ash);font-size:14.5px}
+.unbar{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;margin-top:36px}
+.uv{color:var(--gold-dim);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase}
+@media(max-width:640px){.unrow b{min-width:0}.unrow>div{flex-direction:column;gap:6px}}
 
 /* ---------- hero ---------- */
 #home{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
@@ -346,7 +357,7 @@ footer .wrap{position:relative;z-index:1}
 <body>
 
 <nav id="top">
-  <div style="display:flex;align-items:baseline"><a class="logo" href="#home">SHINOBI <em>LEGACY</em></a><span class="brandmark">Official Site &middot; v2.1 The Awakening</span></div>
+  <div style="display:flex;align-items:baseline"><a class="logo" href="#home">SHINOBI <em>LEGACY</em></a><span class="brandmark">Official Site &middot; v2.2 The Awakening</span></div>
   <button id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   <div id="navlinks">
     <a href="#home">Home</a>
@@ -355,6 +366,7 @@ footer .wrap{position:relative;z-index:1}
     <a href="#clans">Clans</a>
     <a href="#media">Media</a>
     <a href="#updates">Updates</a>
+    <a href="#unbound">Life Unbound</a>
     <a href="#playsec" class="play">Play</a>
   </div>
 </nav>
@@ -714,9 +726,33 @@ footer .wrap{position:relative;z-index:1}
 </div></section>
 
 <!-- PLAY -->
+<!-- LIFE UNBOUND -->
+<section class="block" id="unbound" data-kanji="命"><div class="wrap">
+  <div class="sechead reveal">
+    <span class="kicker"><b class="num">08</b>Second Game</span>
+    <h2>SHINOBI: <em>LIFE UNBOUND</em></h2>
+    <p>A Naruto inspired life simulator. Not the MMORPG, a whole life: born into a name you never chose, in an era you didn't pick.</p>
+    <div class="rule"></div>
+  </div>
+  <p class="unlede reveal">Every life is random. Every choice has consequences. Grow from a nameless academy student into a legend, one decision at a time.</p>
+  <div class="unrow reveal">
+    <div><b>Eleven eras</b><span>From the warring age to the modern era. Fate rolls decide the clan, village and bloodline you're born into.</span></div>
+    <div><b>Academy to specialization</b><span>Graduate, take missions from D-rank up, then choose your path: combat, tracking, medical, intelligence, support or instructor.</span></div>
+    <div><b>A living world</b><span>Rare events move while you live, from a wandering sage to a village summit. Nothing waits for you.</span></div>
+    <div><b>A cinematic opening</b><span>Every new life starts with an animated intro, narrated in a deep voice over the wind.</span></div>
+  </div>
+  <div class="unbar reveal">
+    <div class="uv">Version 2.2.1 &middot; Narrator Fix &middot; playable now</div>
+    <div class="btnrow">
+      <a class="btn" href="https://trae5.github.io/shinobi-sprint/" target="_blank" rel="noopener">Play Life Unbound</a>
+      <a class="btn ghost" href="#playsec">Play the MMORPG</a>
+    </div>
+  </div>
+</div></section>
+
 <section class="block" id="playsec" data-kanji="戦"><div class="wrap">
   <div class="sechead reveal">
-    <span class="kicker"><b class="num">08</b>Enter</span>
+    <span class="kicker"><b class="num">09</b>Enter</span>
     <h2>Launch <em>the game.</em></h2>
     <div class="rule"></div>
   </div>
@@ -739,7 +775,7 @@ footer .wrap{position:relative;z-index:1}
     <div class="launchrow">
       <button class="btn" id="loadgame">Launch Main Game</button>
       <a class="btn ghost" href="https://shinobi-legacy.sites.tab.bot" target="_blank" rel="noopener">Open Full Size</a>
-      <a class="btn ghost" href="https://trae5.github.io/shinobi-sprint/" target="_blank" rel="noopener">Play the Test Build</a>
+      <a class="btn ghost" href="https://trae5.github.io/shinobi-sprint/" target="_blank" rel="noopener">Play Life Unbound</a>
     </div>
     <p class="playnote">The main game lives on its own servers, which are down for an update right now, so it may not load until they're back. The test build above is playable while you wait.</p>
   </div>
@@ -751,7 +787,7 @@ footer .wrap{position:relative;z-index:1}
     <div>
       <div class="flogo">SHINOBI <em>LEGACY</em></div>
       <p>Forge your legacy. A 3D ninja browser MMORPG, built and run by Trae.</p>
-      <div class="fv">Website v2.1 &middot; The Awakening</div>
+      <div class="fv">Website v2.2 &middot; The Awakening</div>
     </div>
     <div class="fcol">
       <b>Site</b>
@@ -761,6 +797,7 @@ footer .wrap{position:relative;z-index:1}
       <a href="#media">Media</a>
       <a href="#updates">Updates</a>
       <a href="#roadmap">Roadmap</a>
+      <a href="#unbound">Life Unbound</a>
     </div>
     <div class="fcol">
       <b>Play</b>
@@ -858,7 +895,7 @@ footer .wrap{position:relative;z-index:1}
   }
 
   // active section in nav
-  var secs=["home","world","game","clans","media","updates","roadmap","dev","playsec"];
+  var secs=["home","world","game","clans","media","updates","roadmap","dev","unbound","playsec"];
   var secsEl=secs.map(function(id){return document.getElementById(id)});
   var io=new IntersectionObserver(function(es){
     es.forEach(function(e){
