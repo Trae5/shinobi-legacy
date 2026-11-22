@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shinobi Legacy</title>
+<meta name="description" content="Shinobi Legacy, a 3D ninja browser game. Your legacy begins here.">
+<style>
+:root{
+  --bg:#0b0b10; --panel:#14141c; --line:#2c2c3a; --txt:#e8e8f0; --dim:#9a9aac;
+  --red:#ff4d4d; --red2:#d0342c; --gold:#e8c368;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--txt);font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+body{line-height:1.55}
+a{color:var(--gold)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;z-index:20;background:rgba(11,11,16,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:10px;padding:14px 0;flex-wrap:wrap}
+.logo{font-weight:900;font-size:20px;letter-spacing:1px;color:#fff}
+.logo em{color:var(--red);font-style:normal}
+nav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+nav button{background:none;border:1px solid transparent;color:var(--dim);font:inherit;font-weight:700;
+  padding:8px 14px;border-radius:999px;cursor:pointer}
+nav button:hover{color:#fff}
+nav button.on{color:#fff;border-color:var(--red2);background:rgba(255,77,77,.12)}
+.banner{background:linear-gradient(90deg,#2a0d0d,#1a0f10);border-bottom:1px solid var(--line)}
+.banner .wrap{padding:9px 20px;font-size:14px;color:#ffb3b3}
+section{display:none;padding:38px 0 60px}
+section.on{display:block}
+h2{margin:0 0 6px;font-size:28px}
+h2 .jp{color:var(--red);font-size:15px;font-weight:800;letter-spacing:3px;display:block;margin-bottom:4px}
+.sub{color:var(--dim);margin:0 0 26px}
+.hero{padding:60px 0 50px;text-align:center}
+.hero .kicker{color:var(--gold);letter-spacing:4px;font-weight:800;font-size:13px}
+.hero h1{font-size:clamp(38px,7vw,64px);margin:10px 0 6px;letter-spacing:2px}
+.hero h1 em{font-style:normal;color:var(--red)}
+.hero p{color:var(--dim);max-width:520px;margin:0 auto 26px}
+.btn{display:inline-block;background:var(--red2);color:#fff;font-weight:800;border:0;border-radius:999px;
+  padding:14px 34px;font-size:17px;cursor:pointer;text-decoration:none}
+.btn:hover{background:#e04338;transform:translateY(-1px)}
+.btn.ghost{background:none;border:1px solid var(--line);color:var(--txt)}
+.btnrow{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 22px;min-width:140px}
+.stat b{display:block;font-size:20px}
+.stat span{color:var(--dim);font-size:13px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:16px}
+.card h3{margin:0 0 8px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:720px){.grid2{grid-template-columns:1fr}}
+.framebox{aspect-ratio:16/10;background:#000;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.framebox iframe{width:100%;height:100%;border:0}
+.note{color:var(--dim);font-size:14px;margin-top:10px}
+.warn{background:#2a1308;border:1px solid #6b3a12;color:#ffc98a;border-radius:12px;padding:12px 16px;margin:14px 0;font-size:15px}
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:720px){.gal{grid-template-columns:1fr 1fr}}
+.gal img{width:100%;display:block;border-radius:12px;border:1px solid var(--line);cursor:zoom-in;transition:transform .15s}
+.gal img:hover{transform:scale(1.02)}
+.shot{position:relative}
+.shot figcaption{position:absolute;left:8px;bottom:8px;background:rgba(0,0,0,.65);color:#fff;font-size:12px;
+  padding:4px 10px;border-radius:999px}
+#lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:50;cursor:zoom-out}
+#lightbox img{max-width:94vw;max-height:90vh;border-radius:8px}
+.ver{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.pill{display:inline-block;background:rgba(63,185,80,.15);border:1px solid #2ea043;color:#7ee28e;
+  font-size:12px;font-weight:800;padding:3px 10px;border-radius:999px}
+.pill.down{background:rgba(255,77,77,.15);border-color:var(--red2);color:#ff9b9b}
+ul.clean{margin:10px 0 0;padding-left:20px;color:var(--dim)}
+ul.clean li{margin:6px 0}
+footer{border-top:1px solid var(--line);color:var(--dim);font-size:14px;padding:26px 0;text-align:center}
+footer .logo{font-size:16px}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <div class="logo">SHINOBI <em>LEGACY</em></div>
+  <nav id="tabs">
+    <button data-t="home" class="on">Home</button>
+    <button data-t="play">Play</button>
+    <button data-t="sneak">Sneak Peek</button>
+    <button data-t="updates">Updates</button>
+    <button data-t="roadmap">Roadmap</button>
+  </nav>
+</div></header>
+
+<div class="banner"><div class="wrap">game servers are down for an update right now, check the Updates tab</div></div>
+
+<section id="home" class="on"><div class="wrap">
+  <div class="hero">
+    <div class="kicker">A 3D NINJA BROWSER GAME</div>
+    <h1>SHINOBI <em>LEGACY</em></h1>
+    <p>Your legacy begins here. Forge your ninja, master the blade, and carve your name into the shinobi world.</p>
+    <div class="btnrow">
+      <button class="btn" onclick="go('play')">Play Now</button>
+      <button class="btn ghost" onclick="go('sneak')">See the Sneak Peek</button>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>v1.122.0</b><span>current version</span></div>
+      <div class="stat"><b>3D</b><span>browser world</span></div>
+      <div class="stat"><b>100%</b><span>free to play</span></div>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="card"><h3>Fight</h3><p class="sub" style="margin:0">Face down rival shinobi in the arena and settle it with steel and jutsu.</p></div>
+    <div class="card"><h3>Legacy</h3><p class="sub" style="margin:0">Limited retired gear events and a world that keeps growing with every update.</p></div>
+  </div>
+</div></section>
+
+<section id="play"><div class="wrap">
+  <h2><span class="jp">PREPARE FOR BATTLE</span>Play the Game</h2>
+  <p class="sub">Runs right in your browser, PC or phone. Loading the game below.</p>
+  <div class="framebox"><iframe id="gameframe" data-src="https://shinobi-legacy.sites.tab.bot" title="Shinobi Legacy game" allow="fullscreen; autoplay; gamepad" loading="lazy"></iframe></div>
+  <p class="note">Game not loading? Open it full size at <a href="https://shinobi-legacy.sites.tab.bot" target="_blank" rel="noopener">shinobi-legacy.sites.tab.bot</a>.</p>
+</div></section>
+
+<section id="sneak"><div class="wrap">
+  <h2><span class="jp">COME TAKE A LOOK</span>Sneak Peek</h2>
+  <p class="sub">Straight from the intro cinematic. Tap any shot to zoom.</p>
+  <div class="gal">
+    <figure class="shot" style="margin:0"><img src="assets/battlefield.jpg" alt="A burning battlefield between two shinobi" loading="lazy"><figcaption>The battlefield</figcaption></figure>
+    <figure class="shot" style="margin:0"><img src="assets/violet-close.jpg" alt="Violet, white hair and glowing eyes" loading="lazy"><figcaption>Violet</figcaption></figure>
+    <figure class="shot" style="margin:0"><img src="assets/clash.jpg" alt="Crimson and Violet mid clash with chakra bursting" loading="lazy"><figcaption>The clash</figcaption></figure>
+    <figure class="shot" style="margin:0"><img src="assets/power-up.jpg" alt="Chakra flaring around a fighter" loading="lazy"><figcaption>Power up</figcaption></figure>
+    <figure class="shot" style="margin:0"><img src="assets/final-form.jpg" alt="A giant chakra avatar facing a nine tailed beast" loading="lazy"><figcaption>Final form</figcaption></figure>
+    <figure class="shot" style="margin:0"><img src="assets/title-card.jpg" alt="Shinobi Legacy title card" loading="lazy"><figcaption>Title card</figcaption></figure>
+  </div>
+</div></section>
+
+<section id="updates"><div class="wrap">
+  <h2><span class="jp">STAY SHARP</span>Updates &amp; Version</h2>
+  <p class="sub">Everything you need to know about where the game is right now.</p>
+  <div class="card">
+    <div class="ver"><h3 style="margin:0">v1.122.0</h3><span class="pill down">servers down for an update</span></div>
+    <ul class="clean">
+      <li><b>Current version:</b> v1.122.0, shipped Nov 12, 2026</li>
+      <li><b>Last live build:</b> Nov 11, 2026, about 10:21 PM CT</li>
+      <li><b>Retired items:</b> live in game since Nov 11, 2026, 6:50 PM CT</li>
+    </ul>
+  </div>
+  <div class="warn"><b>Heads up for the next update:</b> it comes with a FULL SAVE WIPE. Every save starts fresh, so enjoy the grind while it lasts.</div>
+  <div class="card"><h3>What recent updates brought</h3>
+    <ul class="clean">
+      <li>Clan bar and retired gear events</li>
+      <li>Polished world and combat feel</li>
+      <li>Ongoing performance passes between versions</li>
+    </ul>
+  </div>
+</div></section>
+
+<section id="roadmap"><div class="wrap">
+  <h2><span class="jp">THE PATH AHEAD</span>Roadmap</h2>
+  <p class="sub">What's planned for the world of Shinobi Legacy.</p>
+  <div class="grid2">
+    <div class="card"><h3>Academy &amp; AI squads</h3><p class="sub" style="margin:0">Start as an Academy Student, pass a five stage graduation exam, earn your rank, and run missions with your own AI three man squad and sensei.</p></div>
+    <div class="card"><h3>World expansion</h3><p class="sub" style="margin:0">Summoning contracts, stealth missions, weapon forging, player property, traveling merchants, and a bigger connected world.</p></div>
+    <div class="card"><h3>New main menu</h3><p class="sub" style="margin:0">A full holographic style menu redesign for desktop and mobile.</p></div>
+    <div class="card"><h3>Injury system</h3><p class="sub" style="margin:0">Permanent injuries with a cost: lose an arm or an eye in battle and master a one handed or blind warrior path.</p></div>
+    <div class="card"><h3>Multiplayer ambitions</h3><p class="sub" style="margin:0">Clan wars, squads, tournaments, territory control, duels, and verified leaderboards.</p></div>
+    <div class="card"><h3>More ways to grow</h3><p class="sub" style="margin:0">Elemental mastery combos, bloodline awakenings, lost villages, and secret organizations.</p></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="logo">SHINOBI <em>LEGACY</em></div>
+  <div>Your legacy begins here. &copy; <span id="yr"></span> Shinobi Legacy</div>
+</div></footer>
+
+<div id="lightbox"><img id="lbimg" alt=""></div>
+
+<script>
+var GAME_URL = "https://shinobi-legacy.sites.tab.bot";
+var loaded = false;
+document.getElementById("yr").textContent = new Date().getFullYear();
+
+function go(t){
+  document.querySelectorAll("section").forEach(function(s){ s.classList.toggle("on", s.id===t); });
+  document.querySelectorAll("nav button").forEach(function(b){ b.classList.toggle("on", b.dataset.t===t); });
+  if(t==="play" && !loaded){
+    loaded = true;
+    document.getElementById("gameframe").src = GAME_URL;
+  }
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+document.querySelectorAll("nav button").forEach(function(b){ b.addEventListener("click", function(){ go(b.dataset.t); }); });
+
+var lb = document.getElementById("lightbox"), lbimg = document.getElementById("lbimg");
+document.querySelectorAll(".gal img").forEach(function(img){
+  img.addEventListener("click", function(){ lbimg.src = img.src; lb.style.display = "flex"; });
+});
+lb.addEventListener("click", function(){ lb.style.display = "none"; });
+document.addEventListener("keydown", function(e){ if(e.key==="Escape") lb.style.display = "none"; });
+</script>
+</body>
+</html>
