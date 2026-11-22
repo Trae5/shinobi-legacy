@@ -357,7 +357,7 @@ footer .wrap{position:relative;z-index:1}
 <body>
 
 <nav id="top">
-  <div style="display:flex;align-items:baseline"><a class="logo" href="#home">SHINOBI <em>LEGACY</em></a><span class="brandmark">Official Site &middot; v2.2 The Awakening</span></div>
+  <div style="display:flex;align-items:baseline"><a class="logo" href="#home">SHINOBI <em>LEGACY</em></a><span class="brandmark">Official Site &middot; v2.3 The Awakening</span></div>
   <button id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   <div id="navlinks">
     <a href="#home">Home</a>
@@ -742,7 +742,13 @@ footer .wrap{position:relative;z-index:1}
     <div><b>A cinematic opening</b><span>Every new life starts with an animated intro, narrated in a deep voice over the wind.</span></div>
   </div>
   <div class="unbar reveal">
-    <div class="uv">Version 2.2.1 &middot; Narrator Fix &middot; playable now</div>
+    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+      <div class="uv">Version 2.2.1 &middot; Narrator Fix &middot; playable now</div>
+      <div class="statuswrap">
+        <button class="statuspill ubpill s-online" type="button" aria-haspopup="true"><span class="sdot"></span><span class="stext">Online</span></button>
+        <div class="statuspop"><h4><span class="sdot s-online"></span><span class="sword">Online</span></h4><p class="sdesc"></p><div class="sptime"></div></div>
+      </div>
+    </div>
     <div class="btnrow">
       <a class="btn" href="https://trae5.github.io/shinobi-sprint/" target="_blank" rel="noopener">Play Life Unbound</a>
       <a class="btn ghost" href="#playsec">Play the MMORPG</a>
@@ -787,7 +793,7 @@ footer .wrap{position:relative;z-index:1}
     <div>
       <div class="flogo">SHINOBI <em>LEGACY</em></div>
       <p>Forge your legacy. A 3D ninja browser MMORPG, built and run by Trae.</p>
-      <div class="fv">Website v2.2 &middot; The Awakening</div>
+      <div class="fv">Website v2.3 &middot; The Awakening</div>
     </div>
     <div class="fcol">
       <b>Site</b>
@@ -834,7 +840,7 @@ footer .wrap{position:relative;z-index:1}
     offline:{cls:"s-offline",word:"Offline",desc:"Shinobi Legacy is currently unavailable."}
   };
   var meta=SMETA[STATUS.status]||SMETA.offline;
-  document.querySelectorAll(".statuspill").forEach(function(pill){
+  document.querySelectorAll(".statuspill:not(.ubpill)").forEach(function(pill){
     pill.classList.remove("s-online","s-updating","s-offline");
     pill.classList.add(meta.cls);
     pill.querySelector(".stext").textContent=meta.word;
@@ -856,6 +862,66 @@ footer .wrap{position:relative;z-index:1}
   document.addEventListener("keydown",function(e){
     if(e.key==="Escape")document.querySelectorAll(".statuspop.on").forEach(function(x){x.classList.remove("on")});
   });
+
+  /* ============================================================
+     LIFE UNBOUND LIVE STATUS - EDIT THIS BLOCK ONLY
+     status:       "auto" (reads the game's own version file) | "online" | "updating" | "offline"
+     knownVersion: the version you last announced on this site
+     message:      your own line, or "" to use the default
+     lastUpdated:  when you changed it, e.g. "Nov 22, 2026"
+     ============================================================ */
+  var UB={
+    status:"auto",
+    knownVersion:"2.2.1",
+    message:"",
+    lastUpdated:"Nov 22, 2026"
+  };
+  var UBMETA={
+    online:{cls:"s-online",word:"Online",desc:"Life Unbound is live and playable."},
+    updating:{cls:"s-updating",word:"Updating",desc:"A new version just shipped and is rolling out. Refresh the game in a few minutes."},
+    offline:{cls:"s-offline",word:"Offline",desc:"Life Unbound is currently unavailable."}
+  };
+  (function(){
+    var pill=document.querySelector(".statuspill.ubpill");
+    if(!pill)return;
+    var pop=pill.parentNode.querySelector(".statuspop");
+    function ubApply(word,cls,desc,ptime){
+      pill.classList.remove("s-online","s-updating","s-offline");
+      pill.classList.add(cls);
+      pill.querySelector(".stext").textContent=word;
+      pop.querySelector(".sdot").className="sdot "+cls;
+      pop.querySelector(".sword").textContent=word;
+      pop.querySelector(".sdesc").textContent=desc;
+      pop.querySelector(".sptime").textContent=ptime;
+    }
+    var pillOpen=null;
+    pill.addEventListener("click",function(e){
+      e.stopPropagation();
+      var wasOpen=pop.classList.contains("on");
+      document.querySelectorAll(".statuspop.on").forEach(function(x){x.classList.remove("on")});
+      if(!wasOpen)pop.classList.add("on");
+    });
+    if(UB.status==="auto"){
+      fetch("https://trae5.github.io/shinobi-sprint/version.json?cb="+Date.now()).then(function(r){
+        if(!r.ok)throw 0;
+        return r.json();
+      }).then(function(j){
+        var v=(j&&(j.v||j.version))||"";
+        var chip=document.querySelector("#unbound .uv");
+        if(chip&&v)chip.textContent=chip.textContent.replace(/Version [0-9.]+/,"Version "+v);
+        if(v&&UB.knownVersion&&v!==UB.knownVersion){
+          ubApply(UBMETA.updating.word,UBMETA.updating.cls,UBMETA.updating.desc,"Live \u00b7 reads the game\'s version file");
+        }else{
+          ubApply(UBMETA.online.word,UBMETA.online.cls,UB.message||UBMETA.online.desc,"Live \u00b7 reads the game\'s version file");
+        }
+      }).catch(function(){
+        ubApply(UBMETA.online.word,UBMETA.online.cls,UB.message||UBMETA.online.desc,"Live \u00b7 reads the game\'s version file");
+      });
+    }else{
+      var m=UBMETA[UB.status]||UBMETA.offline;
+      ubApply(m.word,m.cls,UB.message||m.desc,"Last updated "+UB.lastUpdated+" \u00b7 set manually by the developer");
+    }
+  })();
 
   var nav=document.getElementById("top"),burger=document.getElementById("burger"),links=document.getElementById("navlinks");
   var hero=document.getElementById("home"),bg=document.getElementById("herowrap");
