@@ -52,7 +52,7 @@ nav#top.solid{background:rgba(10,10,12,.88);backdrop-filter:blur(12px);border-bo
 #burger.x span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
 /* ---------- hero ---------- */
-#home{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+#home{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
 #herobg{position:absolute;inset:-12% 0;background:url('assets/final-form.jpg') center 30%/cover no-repeat;will-change:transform}
 #home::after{content:"";position:absolute;inset:0;background:
   radial-gradient(120% 90% at 50% 10%,rgba(10,10,12,.15) 0%,rgba(10,10,12,.62) 55%,var(--obsidian) 96%),
@@ -684,6 +684,16 @@ footer{border-top:1px solid var(--line);padding:clamp(44px,6vw,70px) 0 34px}
     es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");rio.unobserve(e.target)}});
   },{threshold:.12});
   document.querySelectorAll(".reveal").forEach(function(el){rio.observe(el)});
+  // safety sweep: anything in view reveals even if the observer misses it
+  function sweep(){
+    var vh=window.innerHeight;
+    document.querySelectorAll(".reveal:not(.in)").forEach(function(el){
+      var r=el.getBoundingClientRect();
+      if(r.top<vh*0.94&&r.bottom>0)el.classList.add("in");
+    });
+    if(!document.querySelector(".reveal:not(.in)"))clearInterval(sweepT);
+  }
+  var sweepT=setInterval(sweep,600);sweep();
 
   // villages
   var tabs=document.getElementById("villtabs"),stage=document.getElementById("villstage");
