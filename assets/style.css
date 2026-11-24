@@ -436,3 +436,4 @@ footer::before{content:"忍";position:absolute;right:-20px;bottom:-60px;font-fam
 .gate-note{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim)}
 body.gatelock{overflow:hidden}
 @media(prefers-reduced-motion:reduce){.gate-ring{animation:none}}
+.sagamark{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--dim)}
