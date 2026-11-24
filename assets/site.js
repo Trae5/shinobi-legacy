@@ -9,7 +9,7 @@
      message: your own line, or "" to use the default for the state
      Tip: add ?dev=1 to the URL to see the real site while the gate is on.
      ============================================================ */
-  var GATE={on:false,state:"updating",message:""};
+  var GATE={on:true,state:"updating",message:""};
   (function(){
     var g=document.getElementById("sitegate");if(!g)return;
     if(!GATE.on||location.search.indexOf("dev=1")>-1){g.style.display="none";return}
@@ -85,23 +85,28 @@
     offline:{cls:"s-offline",word:"Offline",desc:"Life Unbound is currently unavailable."}
   };
   (function(){
-    var pill=document.querySelector(".statuspill.ubpill");
-    if(!pill)return;
-    var pop=pill.parentNode.querySelector(".statuspop");
+    var pills=document.querySelectorAll(".statuspill.ubpill");
+    if(!pills.length)return;
     function ubApply(word,cls,desc,ptime){
-      pill.classList.remove("s-online","s-updating","s-offline");
-      pill.classList.add(cls);
-      pill.querySelector(".stext").textContent=word;
-      pop.querySelector(".sdot").className="sdot "+cls;
-      pop.querySelector(".sword").textContent=word;
-      pop.querySelector(".sdesc").textContent=desc;
-      pop.querySelector(".sptime").textContent=ptime;
+      pills.forEach(function(pill){
+        var pop=pill.parentNode.querySelector(".statuspop");
+        pill.classList.remove("s-online","s-updating","s-offline");
+        pill.classList.add(cls);
+        pill.querySelector(".stext").textContent=word;
+        pop.querySelector(".sdot").className="sdot "+cls;
+        pop.querySelector(".sword").textContent=word;
+        pop.querySelector(".sdesc").textContent=desc;
+        pop.querySelector(".sptime").textContent=ptime;
+      });
     }
-    pill.addEventListener("click",function(e){
-      e.stopPropagation();
-      var wasOpen=pop.classList.contains("on");
-      document.querySelectorAll(".statuspop.on").forEach(function(x){x.classList.remove("on")});
-      if(!wasOpen)pop.classList.add("on");
+    pills.forEach(function(pill){
+      var pop=pill.parentNode.querySelector(".statuspop");
+      pill.addEventListener("click",function(e){
+        e.stopPropagation();
+        var wasOpen=pop.classList.contains("on");
+        document.querySelectorAll(".statuspop.on").forEach(function(x){x.classList.remove("on")});
+        if(!wasOpen)pop.classList.add("on");
+      });
     });
     if(UB.status==="auto"){
       fetch("https://trae5.github.io/shinobi-sprint/version.json?cb="+Date.now()).then(function(r){
