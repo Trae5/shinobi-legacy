@@ -9,7 +9,7 @@
      message: your own line, or "" to use the default for the state
      Tip: add ?dev=1 to the URL to see the real site while the gate is on.
      ============================================================ */
-  var GATE={on:false,state:"updating",message:""};
+  var GATE={on:true,state:"updating",message:""};
   (function(){
     var g=document.getElementById("sitegate");if(!g)return;
     if(!GATE.on||location.search.indexOf("dev=1")>-1){g.style.display="none";return}
