@@ -109,7 +109,7 @@
       });
     });
     if(UB.status==="auto"){
-      fetch("https://trae5.github.io/shinobi-sprint/version.json?cb="+Date.now()).then(function(r){
+      fetch("https://trae5.github.io/shinobi-life-unbound/version.json?cb="+Date.now()).then(function(r){
         if(!r.ok)throw 0;
         return r.json();
       }).then(function(j){
