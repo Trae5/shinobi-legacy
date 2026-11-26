@@ -419,7 +419,7 @@
   /* ---------- news: live from the community hub ---------- */
   (function(){
     var grid=document.getElementById("newsgrid");if(!grid)return;
-    var NURL="https://firestore.googleapis.com/v1/projects/shinobi-life-unbound/databases/(default)/documents/community_announcements?pageSize=12&key=AIzaSyA6EnB41g34TnhhLNJcx8OA2vmTrShwoi4";
+    var NURL="https://firestore.googleapis.com/v1/projects/shinobi-life-unbound/databases/(default)/documents/community_announcements?pageSize=12&key=AIzaSyAP3PUlgvD_prlPUXWkZhAkAw9IZT8kP3o";
     var filter="all";
     function esc(x){return String(x||"").replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
     function ago(iso){var t=new Date(iso).getTime();if(!t)return"";var d=Math.floor((Date.now()-t)/1000);if(d<0)d=0;if(d<3600)return Math.max(1,Math.floor(d/60))+" min ago";if(d<86400)return Math.floor(d/3600)+" h ago";var days=Math.floor(d/86400);return days===1?"yesterday":days+" days ago"}
